@@ -16,21 +16,22 @@ import NotificationPage from "./pages/Profile/NotificationPage";
 import DoctorChat from "./pages/DoctorChat";
 
 // Games
-import RehabilitationGamesPage from "./pages/Games/RehabilitationGamesPage";
+import GameTrainingPage from "./pages/Games/GameTrainingPage";
 import BalloonBurst from "./Games/balloonburst";
 import TraceTrain from "./Games/trace_train";
 import MemoryMatch from "./Games/memory_match";
+
+// Focus Mode
+import FocusMode from "./FocusMode/Focusmode";
 
 // Extra Features
 import HealthBlogs from "./HealthBlogs/HealthBlogs";
 import HealthVideos from "./HealthVideos/HealthVideos";
 import Analytics from "./Analytics/Analytics";
-import Notifications from "./pages/Profile/NotificationPage";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Check if the user is authenticated and update state accordingly
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user && user.uid) {
@@ -46,30 +47,33 @@ function App() {
       <Route path="/services" element={<Services />} />
       <Route path="/programs" element={<Programs />} />
       <Route path="/contact" element={<Contact />} />
-      
+
       {/* Auth Pages */}
       <Route path="/login" element={isAuthenticated ? <Navigate to="/" /> : <Login />} />
       <Route path="/signup" element={isAuthenticated ? <Navigate to="/" /> : <Signup />} />
 
-      {/* Profile Pages (Protected) */}
+      {/* Protected Profile Pages */}
       <Route path="/profile" element={isAuthenticated ? <Profile /> : <Navigate to="/login" />} />
-      <Route path="/notifications" element={isAuthenticated ? <Notifications /> : <Navigate to="/login" />} />
+      <Route path="/notifications" element={isAuthenticated ? <NotificationPage /> : <Navigate to="/login" />} />
 
       {/* Doctor Chat */}
       <Route path="/doctorchat" element={isAuthenticated ? <DoctorChat /> : <Navigate to="/login" />} />
 
+      {/* Focus Mode */}
+      <Route path="/focusmode" element={<FocusMode />} />
+
       {/* Games */}
-      <Route path="/rehabilitation-games" element={<RehabilitationGamesPage />} />
+      <Route path="/gametraining" element={<GameTrainingPage />} />
       <Route path="/balloonburst" element={<BalloonBurst />} />
       <Route path="/trace_train" element={<TraceTrain />} />
       <Route path="/memory_match" element={<MemoryMatch />} />
 
-      {/* Extras */}
+      {/* Extra Features */}
       <Route path="/healthblogs" element={<HealthBlogs />} />
       <Route path="/healthvideos" element={<HealthVideos />} />
       <Route path="/analytics" element={isAuthenticated ? <Analytics /> : <Navigate to="/login" />} />
 
-      {/* Fallback Route */}
+      {/* Catch-all Route */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
