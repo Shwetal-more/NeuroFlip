@@ -10,19 +10,25 @@ const AboutUs = () => {
         <section className="content-section">
           <h2>Our Mission</h2>
           <p>
-            At NeuroRehab, we are dedicated to transforming lives through
-            comprehensive neurorehabilitation. Our mission is to provide
-            exceptional care that empowers individuals to achieve their highest
-            potential in recovery and daily living.
+            At NeuroFlip, we are dedicated to enhancing focus and cognitive
+            function. Our mission is to help students and professionals overcome
+            distractions, burnout, and focus fatigue, empowering them to perform
+            at their highest potential in both academic and professional
+            environments. Through engaging brain-training games and effective
+            focus tools, we aim to make productivity and mental clarity accessible
+            to everyone.
           </p>
         </section>
 
         <section className="content-section">
           <h2>Our Vision</h2>
           <p>
-            We envision a world where every individual affected by neurological
-            conditions has access to personalized, evidence-based rehabilitation
-            that maximizes their independence and quality of life.
+            We envision a world where every individual can optimize their focus
+            and cognitive abilities, enabling them to thrive in their academic
+            and professional lives. Through personalized brain-training games and
+            focus-enhancing tools, NeuroFlip aims to empower users to overcome
+            distractions and improve mental clarity, leading to a more productive
+            and fulfilling daily experience.
           </p>
         </section>
 
@@ -32,67 +38,54 @@ const AboutUs = () => {
             <div className="value-item">
               <h3>Compassion</h3>
               <p>
-                We approach every patient with empathy and understanding,
-                recognizing the unique challenges they face in their recovery
-                journey.
+                We approach every user with empathy and understanding, recognizing
+                the unique challenges they face in managing distractions, burnout,
+                and focus fatigue. Through personalized tools and engaging activities,
+                NeuroFlip supports each individual in their journey toward enhanced
+                productivity and mental clarity.
               </p>
             </div>
             <div className="value-item">
               <h3>Excellence</h3>
               <p>
-                Our commitment to excellence drives us to deliver the highest
-                quality care through continuous learning and innovation.
+                Our commitment to excellence drives us to deliver the highest quality
+                care through continuous learning and innovation.
               </p>
             </div>
             <div className="value-item">
               <h3>Integrity</h3>
               <p>
-                We maintain the highest ethical standards in all our
-                interactions, ensuring transparency and trust in our services.
-              </p>
-            </div>
-            <div className="value-item">
-              <h3>Collaboration</h3>
-              <p>
-                We believe in working together with patients, families, and
-                healthcare professionals to achieve the best possible outcomes.
+                We maintain the highest ethical standards in all our interactions,
+                ensuring transparency and trust in our services.
               </p>
             </div>
           </div>
         </section>
 
         <section className="content-section">
-          <h2>Our Expertise</h2>
-          <p>
-            With years of specialized experience in neurorehabilitation, our
-            team of experts brings together diverse skills and knowledge to
-            provide comprehensive care. We stay at the forefront of
-            rehabilitation science, incorporating the latest research and
-            techniques into our practice.
-          </p>
           <div className="expertise-grid">
             <div className="expertise-item">
-              <h3>Specialized Care</h3>
+              <h3>Focus & Cognitive Training</h3>
               <p>
-                Our team includes specialists in neurology, physical therapy,
-                occupational therapy, and speech-language pathology, working
-                together to address all aspects of recovery.
+                Our approach combines engaging brain-training mini-games and focus
+                tools, carefully designed to improve cognitive function, reaction
+                times, and memory.
               </p>
             </div>
             <div className="expertise-item">
-              <h3>Evidence-Based Practice</h3>
+              <h3>Personalized Experience</h3>
               <p>
-                We base our treatment approaches on the latest scientific
-                research and clinical evidence, ensuring the most effective
-                interventions for our patients.
+                We adapt our tools and exercises based on each user's unique
+                challenges, helping them stay on track and achieve their productivity
+                goals.
               </p>
             </div>
             <div className="expertise-item">
-              <h3>Patient-Centered Approach</h3>
+              <h3>Data-Driven Insights</h3>
               <p>
-                Every treatment plan is tailored to the individual's specific
-                needs, goals, and circumstances, ensuring personalized care that
-                delivers results.
+                Real-time feedback and performance tracking enable users to visualize
+                their progress and identify areas for improvement, helping them stay
+                motivated.
               </p>
             </div>
           </div>
@@ -101,11 +94,12 @@ const AboutUs = () => {
         <section className="content-section">
           <h2>Our Commitment</h2>
           <p>
-            We are committed to providing a supportive and nurturing environment
-            where patients can focus on their recovery. Our team works
-            tirelessly to ensure that each individual receives the attention and
-            care they deserve, with a focus on long-term success and improved
-            quality of life.
+            We are committed to helping users enhance their focus and cognitive
+            abilities. At **NeuroFlip**, we strive to create a supportive and
+            engaging environment where individuals can improve productivity, manage
+            distractions, and achieve their personal and professional goals. Our
+            tools are designed to empower users in their journey toward sustained
+            mental clarity and long-term success.
           </p>
         </section>
       </div>

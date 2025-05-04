@@ -5,149 +5,89 @@ const Programs = () => {
   return (
     <div className="page-container">
       <div className="page-content">
-        <h1 className="page-title">Treatment Programs</h1>
+        <h1 className="page-title">Explore NeuroFlip Modes</h1>
 
         <section className="content-section">
-          <h2>Personalized Recovery Paths</h2>
+          <h2>Designed for Focused Living</h2>
           <p>
-            Our treatment programs are carefully designed to address specific
-            neurological conditions and injuries. Each program combines
-            evidence-based therapies, cutting-edge technology, and personalized
-            care to optimize recovery outcomes.
+            NeuroFlip blends productivity science with brain-enhancing games to support students and working professionals. Whether you're beating procrastination or sharpening your cognitive edge, choose your mode and start flipping your brain into gear.
           </p>
         </section>
 
         <section className="content-section">
           <div className="programs-grid">
+
             <div className="program-card">
-              <h3>Stroke Recovery Program</h3>
+              <h3>Focus Mode</h3>
               <div className="program-details">
                 <p>
-                  A comprehensive rehabilitation program designed specifically
-                  for stroke survivors. Our approach focuses on restoring
-                  function and independence through targeted therapies and
-                  advanced rehabilitation techniques.
+                  Dive into 25-minute focus sprints with short breaks and smart nudges to keep you on track. Built on the Pomodoro technique with added AI reminders and audio cues.
                 </p>
-                <h4>Key Features:</h4>
                 <ul>
-                  <li>Early intervention and assessment</li>
-                  <li>Motor function restoration</li>
-                  <li>Speech and language recovery</li>
-                  <li>Cognitive rehabilitation</li>
-                  <li>Balance and mobility training</li>
+                  <li>Customize sprint/break timers</li>
+                  <li>Get periodic focus nudges</li>
+                  <li>Track your flow sessions</li>
                 </ul>
-                <p className="duration">Program Duration: 12-16 weeks</p>
               </div>
             </div>
 
             <div className="program-card">
-              <h3>Brain Injury Rehabilitation</h3>
+              <h3>Brain Game Mode</h3>
               <div className="program-details">
                 <p>
-                  Specialized treatment program for traumatic brain injury (TBI)
-                  recovery. We utilize advanced neurological rehabilitation
-                  techniques to address both physical and cognitive challenges.
+                  Challenge your brain with fast, focused games that enhance memory, rhythm, logic, and mental agility. Designed to be stimulating, not addictive.
                 </p>
-                <h4>Key Features:</h4>
                 <ul>
-                  <li>Cognitive function improvement</li>
-                  <li>Physical rehabilitation</li>
-                  <li>Memory and attention training</li>
-                  <li>Behavioral management</li>
-                  <li>Life skills retraining</li>
+                  <li>3-5 minute cognitive games</li>
+                  <li>Progressive difficulty levels</li>
+                  <li>Offline-accessible for daily training</li>
                 </ul>
-                <p className="duration">Program Duration: 16-24 weeks</p>
               </div>
             </div>
 
             <div className="program-card">
-              <h3>Spinal Cord Recovery</h3>
+              <h3>Guided Task Mode</h3>
               <div className="program-details">
                 <p>
-                  Intensive rehabilitation program for spinal cord injury
-                  patients. Our program combines traditional therapy with
-                  innovative technologies to maximize functional recovery.
+                  Break larger tasks into smaller steps with guided templates and checklists. Ideal for projects, studying, or journaling your workflow.
                 </p>
-                <h4>Key Features:</h4>
                 <ul>
-                  <li>Advanced mobility training</li>
-                  <li>Strength and conditioning</li>
-                  <li>Adaptive equipment training</li>
-                  <li>Pain management</li>
-                  <li>Independence skills development</li>
+                  <li>Pre-built productivity templates</li>
+                  <li>Task progress tracking</li>
+                  <li>Gentle reminders and check-ins</li>
                 </ul>
-                <p className="duration">Program Duration: 20-28 weeks</p>
               </div>
             </div>
 
-            <div className="program-card">
-              <h3>Neurological Rehabilitation</h3>
-              <div className="program-details">
-                <p>
-                  Specialized program for various neurological conditions
-                  including Multiple Sclerosis, Parkinson's Disease, and other
-                  neurological disorders. Our approach is tailored to each
-                  condition's unique challenges.
-                </p>
-                <h4>Key Features:</h4>
-                <ul>
-                  <li>Symptom management</li>
-                  <li>Movement disorders therapy</li>
-                  <li>Balance and coordination training</li>
-                  <li>Daily living skills adaptation</li>
-                  <li>Quality of life improvement</li>
-                </ul>
-                <p className="duration">Program Duration: 12-20 weeks</p>
-              </div>
-            </div>
           </div>
         </section>
 
         <section className="content-section">
-          <h2>Program Benefits</h2>
+          <h2>Why NeuroFlip?</h2>
           <div className="values-grid">
             <div className="value-item">
-              <h3>Evidence-Based Practice</h3>
-              <p>
-                All our programs are based on the latest research and clinical
-                evidence in neurorehabilitation, ensuring the most effective
-                treatment approaches.
-              </p>
+              <h3>Hybrid Wellness</h3>
+              <p>Only app combining Pomodoro focus and cognitive mini-games in one platform.</p>
             </div>
             <div className="value-item">
-              <h3>Personalized Care</h3>
-              <p>
-                Each program is customized to meet individual patient needs,
-                considering their specific condition, goals, and lifestyle
-                requirements.
-              </p>
+              <h3>Gamified but Safe</h3>
+              <p>Engaging experience without addictive loops or dopamine traps.</p>
             </div>
             <div className="value-item">
-              <h3>Progress Tracking</h3>
-              <p>
-                Regular assessments and detailed progress reports help monitor
-                recovery and adjust treatment plans for optimal outcomes.
-              </p>
+              <h3>Track & Improve</h3>
+              <p>Monitor your focus streaks and cognitive progress over time.</p>
             </div>
             <div className="value-item">
-              <h3>Holistic Approach</h3>
-              <p>
-                Our programs address not just physical recovery but also
-                emotional, cognitive, and social aspects of rehabilitation.
-              </p>
+              <h3>Offline-First</h3>
+              <p>Works seamlessly offline – perfect for deep work or on-the-go sessions.</p>
             </div>
           </div>
         </section>
 
         <section className="content-section">
-          <h2>Getting Started</h2>
+          <h2>Ready to Flip Your Focus?</h2>
           <p>
-            Beginning your rehabilitation journey with us starts with a
-            comprehensive assessment to determine the most appropriate program
-            for your needs. Our team will work with you to create a personalized
-            treatment plan and set achievable recovery goals. Contact us today
-            to schedule your initial consultation and take the first step toward
-            recovery.
+            Get started with NeuroFlip today. Pick your mode, track your progress, and unlock your brain’s potential – one session at a time.
           </p>
         </section>
       </div>

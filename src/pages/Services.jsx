@@ -8,12 +8,9 @@ const Services = () => {
         <h1 className="page-title">Our Services</h1>
 
         <section className="content-section">
-          <h2>Comprehensive Rehabilitation Services</h2>
+          <h2>Focus and Cognitive Enhancement</h2>
           <p>
-            We offer a wide range of specialized rehabilitation services, each
-            tailored to meet the unique needs of our patients. Our integrated
-            approach ensures that every aspect of recovery is addressed with
-            expertise and care.
+            At NeuroFlip, we offer a range of services focused on improving mental clarity and cognitive performance. Our programs are designed to enhance focus, memory, and overall cognitive function, helping users reach their peak productivity.
           </p>
         </section>
 
@@ -21,104 +18,85 @@ const Services = () => {
           <div className="services-grid">
             <div className="service-card">
               <div className="service-icon">🧠</div>
-              <h3>Neurological Rehabilitation</h3>
+              <h3>Brain-Training Games</h3>
               <p>
-                Specialized therapy for stroke recovery, traumatic brain injury,
-                and other neurological conditions. Our evidence-based treatments
-                focus on restoring neural pathways and improving functional
-                outcomes.
+                Our engaging and scientifically-backed brain-training games are designed to enhance cognitive skills like memory, attention, and reaction time, helping users build better focus and productivity habits.
               </p>
               <ul className="program-details">
-                <li>Cognitive function restoration</li>
-                <li>Motor skills development</li>
-                <li>Neural pathway stimulation</li>
-                <li>Balance and coordination training</li>
-              </ul>
-            </div>
-
-            <div className="service-card">
-              <div className="service-icon">🦿</div>
-              <h3>Physical Therapy</h3>
-              <p>
-                Comprehensive physical rehabilitation using advanced equipment
-                and techniques. We focus on restoring mobility, strength, and
-                function through personalized exercise programs.
-              </p>
-              <ul className="program-details">
-                <li>Gait training and mobility exercises</li>
-                <li>Strength and conditioning</li>
-                <li>Pain management techniques</li>
-                <li>Advanced equipment therapy</li>
+                <li>Memory enhancement exercises</li>
+                <li>Attention and focus training</li>
+                <li>Reaction time improvement</li>
+                <li>Daily challenge levels</li>
               </ul>
             </div>
 
             <div className="service-card">
               <div className="service-icon">🎯</div>
-              <h3>Occupational Therapy</h3>
+              <h3>Focus-Enhancing Tools</h3>
               <p>
-                Focused rehabilitation to help patients regain independence in
-                daily activities. We provide practical solutions for everyday
-                challenges and adaptive techniques.
+                Our digital tools are designed to help users track their focus and improve mental clarity by using personalized reminders, timers, and environmental control features.
               </p>
               <ul className="program-details">
-                <li>Daily living skills training</li>
-                <li>Adaptive equipment training</li>
-                <li>Home and workplace modifications</li>
-                <li>Fine motor skills development</li>
+                <li>Personalized focus plans</li>
+                <li>Customizable work timers</li>
+                <li>Distraction-blocking tools</li>
+                <li>Focus history and progress tracking</li>
               </ul>
             </div>
 
             <div className="service-card">
-              <div className="service-icon">💭</div>
-              <h3>Speech and Language Therapy</h3>
+              <div className="service-icon">💡</div>
+              <h3>Cognitive Behavioral Techniques</h3>
               <p>
-                Specialized therapy for communication disorders and swallowing
-                difficulties. We help patients regain their ability to
-                communicate effectively and safely manage eating and drinking.
+                We offer specialized sessions using cognitive-behavioral techniques that teach users how to manage focus fatigue, reduce stress, and overcome mental barriers to maintain sustained attention.
               </p>
               <ul className="program-details">
-                <li>Speech and language rehabilitation</li>
-                <li>Swallowing therapy</li>
-                <li>Voice restoration</li>
-                <li>Communication skills training</li>
+                <li>Focus fatigue management</li>
+                <li>Stress reduction strategies</li>
+                <li>Overcoming cognitive barriers</li>
+                <li>Building resilience and mental clarity</li>
               </ul>
             </div>
 
             <div className="service-card">
-              <h3>Cognitive Rehabilitation</h3>
-              <div className="service-icon">🧠</div>
+              <div className="service-icon">🧘‍♀️</div>
+              <h3>Mental Wellness & Stress Management</h3>
               <p>
-                Our cognitive rehabilitation program focuses on improving
-                memory, attention, problem-solving, and executive functioning
-                skills. We use evidence-based techniques to help patients regain
-                cognitive abilities and enhance their quality of life.
+                NeuroFlip provides tools that help users manage stress through mindfulness exercises, breathing techniques, and mental relaxation activities. These are designed to improve overall mental wellness, supporting focus and cognitive function.
               </p>
-              <div className="program-details">
-                <h4>Key Features:</h4>
-                <ul>
-                  <li>Memory enhancement exercises</li>
-                  <li>Attention and concentration training</li>
-                  <li>Problem-solving strategies</li>
-                  <li>Executive function development</li>
-                  <li>Daily living skills training</li>
-                  <li>Compensatory strategy development</li>
-                </ul>
-              </div>
+              <ul className="program-details">
+                <li>Mindfulness exercises</li>
+                <li>Breathing techniques</li>
+                <li>Relaxation activities</li>
+                <li>Stress tracking and management</li>
+              </ul>
             </div>
 
             <div className="service-card">
-              <div className="service-icon">🤝</div>
-              <h3>Support Services</h3>
+              <div className="service-icon">⚡</div>
+              <h3>Motivation & Habit Formation</h3>
               <p>
-                Comprehensive support for patients and families throughout the
-                rehabilitation journey. We provide resources and guidance for
-                long-term success.
+                Our programs incorporate behavioral science techniques to help users stay motivated and form productive habits, fostering sustained engagement with our tools and ensuring long-term success.
               </p>
               <ul className="program-details">
-                <li>Family education and training</li>
-                <li>Psychological support</li>
-                <li>Care coordination</li>
-                <li>Community reintegration</li>
+                <li>Habit tracking</li>
+                <li>Motivation boosters</li>
+                <li>Daily goals and reminders</li>
+                <li>Progress milestones and rewards</li>
+              </ul>
+            </div>
+
+            <div className="service-card">
+              <div className="service-icon">📊</div>
+              <h3>Performance Analytics</h3>
+              <p>
+                NeuroFlip provides users with in-depth performance analytics, offering insights into their cognitive strengths and areas for improvement. These analytics allow users to track their progress and optimize their routines for better productivity.
+              </p>
+              <ul className="program-details">
+                <li>Focus and productivity tracking</li>
+                <li>Daily, weekly, and monthly reports</li>
+                <li>Customizable feedback and goals</li>
+                <li>Visual progress tracking charts</li>
               </ul>
             </div>
           </div>
@@ -127,24 +105,14 @@ const Services = () => {
         <section className="content-section">
           <h2>Our Approach</h2>
           <p>
-            Every service we offer is delivered with a commitment to excellence
-            and personalized care. Our team of specialists works collaboratively
-            to create comprehensive treatment plans that address each patient's
-            unique needs and goals. We utilize the latest technology and
-            evidence-based practices to ensure optimal outcomes for our
-            patients.
+            Every service we offer is designed with your unique needs in mind. At NeuroFlip, we believe in a holistic approach to cognitive enhancement that combines scientifically-backed games, stress management techniques, and habit-forming strategies. Our services are fully personalized to help users optimize their focus and productivity based on their individual challenges and goals.
           </p>
         </section>
 
         <section className="content-section">
-          <h2>Quality Assurance</h2>
+          <h2>Commitment to Excellence</h2>
           <p>
-            Our services are delivered by licensed and certified professionals
-            who maintain the highest standards of care. We regularly update our
-            practices based on the latest research and medical advancements in
-            neurorehabilitation. Our facility is equipped with state-of-the-art
-            technology and maintains strict quality control measures to ensure
-            the best possible care for our patients.
+            At NeuroFlip, we are committed to maintaining the highest standards in everything we do. Our team of experts is dedicated to continuously improving our services, based on the latest research in cognitive science and neuroscience. We ensure that every user receives the most effective tools and strategies for improving focus, mental clarity, and overall cognitive function.
           </p>
         </section>
       </div>
