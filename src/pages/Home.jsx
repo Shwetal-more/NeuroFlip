@@ -107,24 +107,17 @@ const Home = () => {
           <div className="description-grid">
             <div className="description-content">
               <h2 className="section-title">
-                Your Journey to Recovery Starts Here
+              Your Focused Future Starts with NeuroFlip
               </h2>
               <p className="section-text">
-                Welcome to Neuro Rehab, your comprehensive platform for
-                neurological rehabilitation and recovery. We combine
-                cutting-edge technology with evidence-based therapeutic
-                approaches to provide personalized care and support throughout
-                your healing journey.
+              Welcome to NeuroFlip, a dual-purpose web app designed to empower your mind and boost productivity. Whether you're a student preparing for exams or a professional managing a heavy workload, NeuroFlip helps you stay sharp, focused, and balanced through scientifically-informed mental training and task management tools.
               </p>
               <div className="features-list">
                 <div className="feature-item">
                   <span className="checkmark">✓</span>
                   <span>Personalized Care</span>
                 </div>
-                <div className="feature-item">
-                  <span className="checkmark">✓</span>
-                  <span>Expert Guidance</span>
-                </div>
+                
                 <div className="feature-item">
                   <span className="checkmark">✓</span>
                   <span>Progress Tracking</span>
@@ -136,32 +129,31 @@ const Home = () => {
               <div className="image-content">
                 <div className="info-card">
                   <div className="info-item blue">
-                    <h3>Evidence-Based Approach</h3>
-                    <p>
-                      Our rehabilitation programs are developed by leading
-                      neurological experts and backed by scientific research.
-                    </p>
-                  </div>
-                  <div className="info-item purple">
-                    <h3>Comprehensive Support</h3>
-                    <p>
-                      From initial assessment to recovery milestones, we provide
-                      continuous guidance and support throughout your journey.
-                    </p>
-                  </div>
-                  <div className="info-item green">
-                    <h3>Interactive Learning</h3>
-                    <p>
-                      Engage with interactive exercises and real-time feedback
-                      to enhance your rehabilitation experience.
-                    </p>
-                  </div>
-                  <div className="info-item orange">
-                    <h3>Community Support</h3>
-                    <p>
-                      Connect with others on similar recovery journeys and share
-                      experiences in a supportive environment.
-                    </p>
+                  <div className="info-item blue">
+  <h3>Evidence-Based Design</h3>
+  <p>
+    All features in NeuroFlip are built on neuroscience research to promote cognitive engagement and sustained attention.
+  </p>
+</div>
+<div className="info-item purple">
+  <h3>All-in-One Productivity</h3>
+  <p>
+    Combine focused task sessions with mental refreshers using Pomodoro timers, guided breaks, and calming tools.
+  </p>
+</div>
+<div className="info-item green">
+  <h3>Gamified Brain Training</h3>
+  <p>
+    Play interactive mini-games designed to enhance memory, attention span, and processing speed in short, fun bursts.
+  </p>
+</div>
+<div className="info-item orange">
+  <h3>Supportive Community</h3>
+  <p>
+    Join a like-minded community of students and professionals, share progress, and find motivation through shared goals.
+  </p>
+</div>
+
                   </div>
                 </div>
               </div>
@@ -182,12 +174,11 @@ const Home = () => {
             }}
           >
             <div className="grid-content" onClick={handleCardClick} style={{ cursor: 'pointer' }}>
-              <h3 className="feature-title">Rehabilitation Focus</h3>
-              <p className="feature-description">
-                Personalized exercises to aid your recovery. Our programs are
-                tailored to your needs, ensuring a steady and safe
-                rehabilitation journey.
-              </p>
+            <h3 className="feature-title">Focus Enhancement</h3>
+<p className="feature-description">
+  Boost your concentration with personalized mini-games and productivity tools. NeuroFlip adapts to your focus patterns for a more efficient work or study session.
+</p>
+
             </div>
           </div>
           <div
@@ -197,11 +188,11 @@ const Home = () => {
             }}
           >
             <div className="grid-content" onClick={handleCardClick} style={{ cursor: 'pointer' }}>
-              <h3 className="feature-title">Games</h3>
-              <p className="feature-description">
-                Engaging cognitive and physical therapy games. Improve memory,
-                motor skills, and coordination while having fun.
-              </p>
+            <h3 className="feature-title">Brain-Training Games</h3>
+<p className="feature-description">
+  Sharpen your memory, attention, and problem-solving skills with engaging mini-games designed to enhance cognitive performance and reduce mental fatigue.
+</p>
+
             </div>
           </div>
           <a
