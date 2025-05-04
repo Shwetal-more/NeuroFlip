@@ -1,0 +1,174 @@
+.mathbuzz-container {
+    font-family: 'Arial', sans-serif;
+    background: #222;
+    color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: 350px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    position: relative;
+  }
+  
+  .mathbuzz-container h1 {
+    color: #0ff;
+    margin: 0 0 20px;
+    font-size: 1.8rem;
+  }
+  
+  .problem {
+    font-size: 3rem;
+    margin: 20px 0;
+    min-height: 70px;
+    color: #fff;
+    letter-spacing: 2px;
+  }
+  
+  .answer-input {
+    font-size: 2rem;
+    width: 150px;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #0ff;
+    border-radius: 5px;
+    background: #333;
+    color: #fff;
+    outline: none;
+  }
+  
+  .feedback {
+    min-height: 30px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+  }
+  
+  .feedback.correct {
+    color: #0f0;
+    transform: scale(1.1);
+  }
+  
+  .feedback.incorrect {
+    color: #f00;
+    transform: scale(1.1);
+  }
+  
+  .stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .stat-box {
+    background: #333;
+    padding: 10px;
+    border-radius: 5px;
+    width: 30%;
+  }
+  
+  .time-left {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #ff0;
+  }
+  
+  .progress-bar {
+    height: 5px;
+    background: #0ff;
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
+    transition: width 0.1s linear;
+  }
+  
+  .game-over {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+  }
+  
+  .game-over h2 {
+    color: #0ff;
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .final-score {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .controls {
+    margin: 20px 0;
+  }
+  
+  .controls button {
+    margin: 0 10px;
+  }
+  
+  button {
+    background: #0ff;
+    color: #111;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: all 0.3s;
+  }
+  
+  button:hover {
+    background: #0dd;
+    transform: translateY(-2px);
+  }
+  
+  button:disabled {
+    background: #666;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  .settings {
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 5px;
+  }
+  
+  .setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .setting-row input {
+    width: 60px;
+    padding: 5px;
+    background: #333;
+    color: #fff;
+    border: 1px solid #0ff;
+    border-radius: 3px;
+  }
+  
+  .back-button {
+    margin-top: 20px;
+    background: #333;
+    color: #0ff;
+  }
+  
+  .back-button:hover {
+    background: #444;
+  }
