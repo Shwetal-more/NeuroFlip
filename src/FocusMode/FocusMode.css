@@ -19,25 +19,26 @@ body {
   color: var(--dark-color);
   transition: all 0.3s ease;
   line-height: 1.6;
+  min-height: 100vh;
 }
 
 /* Focus Wrapper */
 .focus-wrapper {
-  width: 90%;
-  max-width: 800px;
-  min-height: 85vh;
-  margin: 3rem auto;
-  padding: 2.5rem;
+  width: 95%;
+  max-width: 1200px;
+  min-height: 90vh;
+  margin: 2rem auto;
+  padding: 2rem;
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   border-radius: 24px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
 .focus-wrapper::before {
@@ -99,11 +100,12 @@ h1::after {
 
 /* Timer Section */
 .timer-section {
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   padding: 1.5rem;
   background-color: white;
   border-radius: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  flex: 1;
 }
 
 .timer {
@@ -154,6 +156,7 @@ h1::after {
   background-color: white;
   border-radius: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  flex: 1;
 }
 
 .task-section h2 {
@@ -314,58 +317,6 @@ body.focus-mode .focus-toggle-btn {
   background: linear-gradient(135deg, #5e60ce, #6930c3);
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .focus-wrapper {
-    padding: 2rem 1.5rem;
-    margin: 2rem auto;
-    width: 95%;
-  }
-
-  .timer {
-    font-size: 3rem;
-  }
-
-  .task-input {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .task-input button {
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .focus-wrapper {
-    padding: 1.5rem 1rem;
-    border-radius: 16px;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-  }
-
-  .timer {
-    font-size: 2.5rem;
-  }
-
-  .timer-controls button {
-    padding: 10px 16px;
-    min-width: 80px;
-    font-size: 0.9rem;
-  }
-
-  .task-input input,
-  .task-input button {
-    padding: 10px 14px;
-  }
-
-  .task-list li {
-    padding: 12px;
-    font-size: 0.95rem;
-  }
-}
 /* Collaborative Mode Styles */
 .collaborative-section {
   margin: 2rem 0;
@@ -374,6 +325,7 @@ body.focus-mode .focus-toggle-btn {
   border-radius: 16px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
   text-align: center;
+  flex: 1;
 }
 
 .collaborative-section h2 {
@@ -536,8 +488,35 @@ body.focus-mode .divider::after {
   color: #a1a1c2;
 }
 
-/* Responsive Adjustments */
+/* Main Content Layout */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex: 1;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
+  .focus-wrapper {
+    padding: 1.5rem;
+    margin: 1rem auto;
+    min-height: 95vh;
+  }
+
+  .timer {
+    font-size: 3rem;
+  }
+
+  .task-input {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .task-input button {
+    width: 100%;
+  }
+
   .collaborative-section {
     padding: 1.5rem;
   }
@@ -549,6 +528,36 @@ body.focus-mode .divider::after {
 }
 
 @media (max-width: 480px) {
+  .focus-wrapper {
+    padding: 1rem;
+    border-radius: 16px;
+    width: 98%;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .timer {
+    font-size: 2.5rem;
+  }
+
+  .timer-controls button {
+    padding: 10px 16px;
+    min-width: 80px;
+    font-size: 0.9rem;
+  }
+
+  .task-input input,
+  .task-input button {
+    padding: 10px 14px;
+  }
+
+  .task-list li {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
   .collaborative-section {
     padding: 1.2rem;
   }
