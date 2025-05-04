@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
-import SuccessStories from "./Swiper/Swiper";
 import Footer from "./Footer/Footer";
 
 
@@ -63,7 +62,7 @@ const Home = () => {
       <nav className="nav-links">
         <button onClick={() => navigate("/about")} className="nav-link">About Us</button>
         <button onClick={() => navigate("/services")} className="nav-link">Our Services</button>
-        <button onClick={() => navigate("/programs")} className="nav-link">Treatment Programs</button>
+        <button onClick={() => navigate("/programs")} className="nav-link">Focus Tools</button>
         <button onClick={() => navigate("/contact")} className="nav-link">Contact Us</button>
       </nav>
     
@@ -264,7 +263,7 @@ const Home = () => {
 
         {/* Healing Highlights Section */}
 <div className="healing-highlights">
-  <h2>Healing Highlights</h2>
+  <h2>Neuro Highlights</h2>
   <div className="highlights-grid">
     
     {/* Health Blogs Card */}
@@ -283,9 +282,7 @@ const Home = () => {
       >
         <h3 className="highlight-title">Health Blogs</h3>
         <p className="highlight-description">
-          Explore insightful articles on recovery, wellness, and
-          rehabilitation. Stay updated with expert advice, success
-          stories, and the latest trends in neuro rehab.
+        Explore insightful articles on focus, productivity, and mental wellness. Stay updated with expert tips, success stories, and the latest strategies in cognitive enhancement and burnout recovery.
         </p>
       </div>
     </a>
@@ -306,9 +303,7 @@ const Home = () => {
       >
         <h3 className="highlight-title">Health Videos</h3>
         <p className="highlight-description">
-          Informative and engaging videos covering therapy techniques,
-          patient experiences, and expert tips to support your healing
-          journey.
+        Informative and engaging videos covering brain-training techniques, real user experiences, and expert tips to boost focus, beat burnout, and improve daily productivity.
         </p>
       </div>
     </a>
@@ -318,9 +313,7 @@ const Home = () => {
 
 
         {/* Success Stories Section */}
-        <div className="success-stories-section">
-          <SuccessStories />
-        </div>
+       
       </div>
 
       <Footer />
