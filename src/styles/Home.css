@@ -1112,3 +1112,15 @@ body {
   box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.4);
 }
 
+.feature-link {
+  color: #4CAF50;
+  font-weight: 600;
+  margin-top: 10px;
+  text-decoration: underline;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.feature-link:hover {
+  color: #3d8b40;
+}
