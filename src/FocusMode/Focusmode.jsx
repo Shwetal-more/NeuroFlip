@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import './FocusMode.css';
+import io from 'socket.io-client';
 
 const FocusMode = () => {
   const [isFocusMode, setIsFocusMode] = useState(() => localStorage.getItem('focusMode') === 'true');
@@ -16,15 +17,36 @@ const FocusMode = () => {
   const [mockConnectedCode, setMockConnectedCode] = useState('');
   const [connected, setConnected] = useState(false);
 
-  const intervalRef = useRef(null);
-  const audioRef = useRef(null);
-
   const [tasks, setTasks] = useState(() => {
     const stored = localStorage.getItem('focusTasks');
     return stored ? JSON.parse(stored) : [];
   });
 
   const [newTask, setNewTask] = useState('');
+  
+  const audioRef = useRef(null);
+  const socketRef = useRef(null);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    // Connect to the server
+    socketRef.current = io('http://localhost:5000');
+    
+    socketRef.current.on('receive-timer', ({ minutes, seconds, isRunning, isBreak }) => {
+      setMinutes(minutes);
+      setSeconds(seconds);
+      setIsRunning(isRunning);
+      setIsBreak(isBreak);
+    });
+
+    socketRef.current.on('receive-tasks', (tasks) => {
+      setTasks(tasks);
+    });
+
+    return () => {
+      socketRef.current.disconnect();
+    };
+  }, []);
 
   // Initial load
   useEffect(() => {
@@ -96,19 +118,44 @@ const FocusMode = () => {
   }, [isRunning, minutes, isBreak]);
 
   const toggleFocusMode = () => setIsFocusMode(prev => !prev);
-  const startTimer = () => setIsRunning(true);
-  const pauseTimer = () => { clearInterval(intervalRef.current); setIsRunning(false); };
-  const resetTimer = () => { clearInterval(intervalRef.current); setIsRunning(false); setIsBreak(false); setMinutes(25); setSeconds(0); };
+  const startTimer = () => {
+    setIsRunning(true);
+    socketRef.current.emit('update-timer', { minutes, seconds, isRunning: true, isBreak, session: sessionCode });
+  };
+  const pauseTimer = () => { 
+    clearInterval(intervalRef.current); 
+    setIsRunning(false);
+    socketRef.current.emit('update-timer', { minutes, seconds, isRunning: false, isBreak, session: sessionCode });
+  };
+  const resetTimer = () => { 
+    clearInterval(intervalRef.current); 
+    setIsRunning(false); 
+    setIsBreak(false); 
+    setMinutes(25); 
+    setSeconds(0);
+    socketRef.current.emit('update-timer', { minutes: 25, seconds: 0, isRunning: false, isBreak: false, session: sessionCode });
+  };
 
   const handleTaskAdd = () => {
     if (newTask.trim()) {
-      setTasks([...tasks, { id: Date.now(), text: newTask.trim(), done: false, priority: false }]);
+      const newTaskItem = { id: Date.now(), text: newTask.trim(), done: false, priority: false };
+      setTasks([...tasks, newTaskItem]);
       setNewTask('');
+      socketRef.current.emit('update-tasks', { tasks: [...tasks, newTaskItem], session: sessionCode });
     }
   };
 
-  const toggleTask = (id) => setTasks(tasks.map(task => task.id === id ? { ...task, done: !task.done } : task));
-  const togglePriority = (id) => setTasks(tasks.map(task => task.id === id ? { ...task, priority: !task.priority } : task));
+  const toggleTask = (id) => {
+    const updatedTasks = tasks.map(task => task.id === id ? { ...task, done: !task.done } : task);
+    setTasks(updatedTasks);
+    socketRef.current.emit('update-tasks', { tasks: updatedTasks, session: sessionCode });
+  };
+
+  const togglePriority = (id) => {
+    const updatedTasks = tasks.map(task => task.id === id ? { ...task, priority: !task.priority } : task);
+    setTasks(updatedTasks);
+    socketRef.current.emit('update-tasks', { tasks: updatedTasks, session: sessionCode });
+  };
 
   const playSound = () => {
     if (audioRef.current) {
@@ -120,6 +167,7 @@ const FocusMode = () => {
   const handleMockConnect = () => {
     if (mockConnectedCode.trim() === sessionCode) {
       setConnected(true);
+      socketRef.current.emit('join', sessionCode);
     } else {
       alert('Invalid Session Code');
     }
