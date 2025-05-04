@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../authentication/firebase";
-import { doc, getDoc, collection, getDocs } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../authentication/firebase";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css";
@@ -9,8 +9,6 @@ import "./Profile.css";
 const Profile = () => {
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
-  const [showMedical, setShowMedical] = useState(false);
-  const [questionnaireData, setQuestionnaireData] = useState(null);
   const [showAccount, setShowAccount] = useState(false);
   const navigate = useNavigate();
 
@@ -25,18 +23,9 @@ const Profile = () => {
         if (userDoc.exists()) {
           setUserData(userDoc.data());
         }
-
-        // Fetch questionnaire response from Firestore
-        const qSnapshot = await getDocs(collection(db, "questionnaire_responses"));
-        qSnapshot.forEach((doc) => {
-          if (doc.data().userId === currentUser.uid) {
-            setQuestionnaireData(doc.data());
-          }
-        });
       } else {
         setUser(null);
         setUserData(null);
-        setQuestionnaireData(null);
       }
     });
 
@@ -48,25 +37,7 @@ const Profile = () => {
   }
 
   const handleNavigation = (path) => {
-    switch(path) {
-      case "Notification":
-        navigate("/notifications");
-        break;
-      case "Progress":
-        navigate("/progress");
-        break;
-      case "Privacy & Security":
-        navigate("/privacy-security");
-        break;
-      case "Language":
-        navigate("/language");
-        break;
-      case "ChatBot":
-        navigate("/chatbot");
-        break;
-      default:
-        break;
-    }
+    navigate(`/${path.toLowerCase().replace(/\s+/g, "-")}`);
   };
 
   return (
@@ -81,38 +52,17 @@ const Profile = () => {
           <h2>Account</h2>
           <ul className="profile-options">
             <li onClick={() => setShowAccount(!showAccount)}>Account</li>
-            <li onClick={() => handleNavigation("Notification")}>Notification</li>
-            <li onClick={() => handleNavigation("Progress")}>Progress</li>
-            <li onClick={() => handleNavigation("Privacy & Security")}>Privacy & Security</li>
-            <li onClick={() => handleNavigation("Language")}>Language</li>
-            <li onClick={() => setShowMedical(!showMedical)}>Medical History</li>
-            <li onClick={() => handleNavigation("ChatBot")}>ChatBot</li>
+            <li onClick={() => handleNavigation("notifications")}>Notification</li>
+            <li onClick={() => handleNavigation("progress")}>Progress</li>
+            <li onClick={() => handleNavigation("privacy-security")}>Privacy & Security</li>
+            <li onClick={() => handleNavigation("language")}>Language</li>
+            <li onClick={() => navigate("/doctorchat")}>ChatBot</li>
           </ul>
-
-          {showMedical && (
-            <div className="medical-history">
-              <h4>Medical History</h4>
-              {questionnaireData ? (
-                <ul>
-                  {Object.entries(questionnaireData).map(([key, value]) => (
-                    <li key={key}>
-                      <strong>{key}:</strong> {value.toString()}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>No medical history found.</p>
-              )}
-            </div>
-          )}
 
           {showAccount && (
             <div className="account-section">
               <h4>Account Details</h4>
-              <p><strong>Name:</strong> {userData?.fullName || "N/A"}</p>
               <p><strong>Email:</strong> {user.email}</p>
-              <p><strong>Emergency Contact:</strong> {userData?.emergencyContact || "N/A"}</p>
-              <p><strong>Blood Type:</strong> {userData?.bloodType || "N/A"}</p>
             </div>
           )}
         </div>

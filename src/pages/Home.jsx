@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
 import Footer from "./Footer/Footer";
@@ -6,7 +6,6 @@ import Footer from "./Footer/Footer";
 const Home = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
-  const [selectedMood, setSelectedMood] = useState(null);
 
   const handleNotificationClick = () => {
     navigate("/notifications");
@@ -17,17 +16,7 @@ const Home = () => {
     navigate("/login");
   };
 
-  const handleMoodClick = (index) => {
-    setSelectedMood(index);
-    const buttons = document.querySelectorAll(".pain-scale-button");
-    buttons.forEach((button, i) => {
-      if (i === index) {
-        button.classList.add("active");
-      } else {
-        button.classList.remove("active");
-      }
-    });
-  };
+ 
 
   return (
     <div className="home-container">
@@ -212,32 +201,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Pain Scale Section */}
-        <div className="pain-scale-section">
-          <h2 className="section-title">How are you feeling today?</h2>
-          <div className="pain-scale-grid">
-            {[
-              { emoji: "😊", value: "0", label: "No Pain" },
-              { emoji: "🙂", value: "2", label: "Mild Discomfort" },
-              { emoji: "😐", value: "4", label: "Moderate Pain" },
-              { emoji: "😕", value: "6", label: "Severe Pain" },
-              { emoji: "😟", value: "8", label: "Very Severe Pain" },
-              { emoji: "😢", value: "10", label: "Unbearable Pain" },
-            ].map((mood, index) => (
-              <button
-                key={index}
-                className={`pain-scale-button ${
-                  selectedMood === index ? "active" : ""
-                }`}
-                onClick={() => handleMoodClick(index)}
-              >
-                <p className="mood-emoji">{mood.emoji}</p>
-                <p className="mood-value">{mood.value}</p>
-                <p className="mood-label">{mood.label}</p>
-              </button>
-            ))}
-          </div>
-        </div>
+      
 
         {/* Healing Highlights Section */}
         <div className="healing-highlights">
