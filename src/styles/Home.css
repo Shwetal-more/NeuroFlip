@@ -1124,3 +1124,15 @@ body {
 .feature-link:hover {
   color: #3d8b40;
 }
+/* In your Home.css */
+.btn {
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* Make sure no parent element has overflow: hidden */
+.home-container {
+  position: relative;
+  z-index: 1;
+}
