@@ -1,28 +1,36 @@
-# 🧠 Neurorehabilitation Gaming Website 🎮  
+🧠 NeuroFlip: Focus & Brain-Training Web App 🎮
+NeuroFlip is a dual-purpose web app designed to help students and professionals (ages 17–40) who struggle with distraction, burnout, or focus fatigue. It combines engaging brain-training mini-games with light-focus tools like Pomodoro timers and guided tasks, enhancing cognitive abilities and improving productivity.
 
-A web-based platform designed to assist patients in their neurorehabilitation journey through engaging and interactive games.  
+🚀 Features
+Brain-Training Mini-Games: Engaging, quick games to improve cognitive function, reaction times, and memory.
 
-## 🚀 Features  
+Pomodoro Timer: Structured work-rest intervals to help manage focus and productivity.
 
-- **Interactive Games:** Designed to enhance cognitive and motor skills.  
-- **Personalized Progress Tracking:** Users can monitor their improvement over time.  
-- **Adaptive Difficulty Levels:** Games adjust based on user performance.  
-- **User-Friendly Interface:** Simple, accessible, and engaging.  
-- **Secure Authentication:** Login and signup functionality for personalized experiences.  
-- **Real-Time Data Analysis:** Tracks user interactions to provide meaningful insights.  
+Guided Tasks: Task management tools designed to boost productivity and reduce burnout.
 
-## 🛠️ Tech Stack  
+Distraction Management Tools: Helps users stay on track and improve long-term focus and mental clarity.
 
-- **Frontend:** React.js, HTML, CSS, JavaScript  
-- **Backend:** Node.js, Express.js  
-- **Database:** PostgreSQL / Firebase (for authentication)  
-- **Game Engine:** Phaser.js (if applicable)  
-- **Authentication:** Firebase Authentication / bcrypt & JWT  
-- **Hosting:** Vercel / Netlify / Firebase Hosting  
+Adaptive Difficulty: Difficulty of mini-games adjusts based on user performance for an optimal challenge.
 
-## 📌 Installation  
+Real-Time Feedback: Tracks user performance, providing meaningful insights to aid improvement.
 
-1. **Clone the repository**  
-   ```bash
-   git clone https://github.com/yourusername/neurorehab.git
-   cd neurorehab
+User-Friendly Interface: Designed to be simple, intuitive, and engaging for all users.
+
+🛠️ Tech Stack
+Frontend: React.js, HTML, CSS, JavaScript
+
+Backend: Firebase
+
+Database: PostgreSQL / Firebase (for authentication)
+
+Game Engine: Phaser.js (for mini-games)
+
+Authentication: Firebase Authentication / bcrypt & JWT
+
+Hosting: Vercel / Netlify / Firebase Hosting
+
+📌 Installation
+Clone the repository
+
+git clone https://github.com/yourusername/neuroflip.git
+cd neuroflip
