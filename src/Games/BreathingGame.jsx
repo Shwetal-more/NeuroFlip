@@ -1,208 +1,170 @@
-import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './BreathingGame.css'; // You'll need to create this CSS file
+import React, { useState, useEffect, useRef } from 'react';
+
+import './BreathingGame.css';
 
 const BreathingGame = () => {
   const navigate = useNavigate();
-  const [currentCycle, setCurrentCycle] = useState(0);
+  const [cycleCount, setCycleCount] = useState(0);
+  const [phase, setPhase] = useState('idle'); // idle, inhale, hold, exhale, complete
   const [isRunning, setIsRunning] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+
   const [settings, setSettings] = useState({
     inhaleTime: 4,
     holdTime: 2,
     exhaleTime: 6,
     cycles: 5
   });
-  
-  const animationTimeoutRef = useRef(null);
-  const breathCircleRef = useRef(null);
+
+  const timerRef = useRef(null);
+  const circleRef = useRef(null);
+
+  const clearTimers = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+  };
+
+  const resetAnimation = () => {
+    if (circleRef.current) {
+      circleRef.current.style.animation = 'none';
+      void circleRef.current.offsetWidth; // Force reflow
+    }
+  };
+
+  const startCycle = () => {
+    if (cycleCount >= settings.cycles) {
+      setPhase('complete');
+      setIsRunning(false);
+      return;
+    }
+
+    setPhase('inhale');
+    resetAnimation();
+    if (circleRef.current) {
+      circleRef.current.style.animation = `inhale ${settings.inhaleTime}s forwards`;
+    }
+
+    timerRef.current = setTimeout(() => {
+      setPhase('hold');
+      resetAnimation();
+      if (circleRef.current) {
+        circleRef.current.style.animation = `hold ${settings.holdTime}s forwards`;
+      }
+
+      timerRef.current = setTimeout(() => {
+        setPhase('exhale');
+        resetAnimation();
+        if (circleRef.current) {
+          circleRef.current.style.animation = `exhale ${settings.exhaleTime}s forwards`;
+        }
+
+        timerRef.current = setTimeout(() => {
+          setCycleCount(prev => prev + 1);
+          startCycle();
+        }, settings.exhaleTime * 1000);
+      }, settings.holdTime * 1000);
+    }, settings.inhaleTime * 1000);
+  };
 
   const startBreathing = () => {
     if (isRunning) return;
-    
     setIsRunning(true);
     setIsPaused(false);
-    setCurrentCycle(0);
-    nextCycle();
+    setCycleCount(0);
+    startCycle();
   };
-  
-  const togglePause = () => {
-    setIsPaused(!isPaused);
-    
+
+  const pauseResume = () => {
+    if (!isRunning) return;
+
     if (isPaused) {
-      nextCycle();
+      setIsPaused(false);
+      startCycle();
     } else {
-      clearTimeout(animationTimeoutRef.current);
-      if (breathCircleRef.current) {
-        breathCircleRef.current.style.animation = 'none';
+      setIsPaused(true);
+      clearTimers();
+      if (circleRef.current) {
+        const style = window.getComputedStyle(circleRef.current);
+        const anim = style.animationName;
+        const progress = style.animationDuration;
+        resetAnimation();
       }
     }
   };
-  
-  const reset = () => {
+
+  const resetGame = () => {
+    clearTimers();
     setIsRunning(false);
     setIsPaused(false);
-    clearTimeout(animationTimeoutRef.current);
-    
-    if (breathCircleRef.current) {
-      breathCircleRef.current.style.animation = 'none';
-    }
-    setCurrentCycle(0);
+    setCycleCount(0);
+    setPhase('idle');
+    resetAnimation();
   };
-  
-  const nextCycle = () => {
-    if (!isRunning || isPaused) return;
-    
-    const { inhaleTime, holdTime, exhaleTime, cycles } = settings;
-    
-    if (currentCycle >= cycles) {
-      reset();
-      return;
-    }
-    
-    setCurrentCycle(prev => prev + 1);
-    
-    // Inhale
-    if (breathCircleRef.current) {
-      breathCircleRef.current.style.animation = `breatheIn ${inhaleTime * 1000}ms forwards`;
-    }
-    
-    animationTimeoutRef.current = setTimeout(() => {
-      if (!isRunning || isPaused) return;
-      
-      // Hold after inhale
-      if (holdTime > 0) {
-        if (breathCircleRef.current) {
-          breathCircleRef.current.style.animation = `hold ${holdTime * 1000}ms forwards`;
-        }
-        
-        animationTimeoutRef.current = setTimeout(() => {
-          if (!isRunning || isPaused) return;
-          
-          // Exhale
-          if (breathCircleRef.current) {
-            breathCircleRef.current.style.animation = `breatheOut ${exhaleTime * 1000}ms forwards`;
-          }
-          
-          animationTimeoutRef.current = setTimeout(() => {
-            if (!isRunning || isPaused) return;
-            nextCycle();
-          }, exhaleTime * 1000);
-        }, holdTime * 1000);
-      } else {
-        // Exhale (no hold)
-        if (breathCircleRef.current) {
-          breathCircleRef.current.style.animation = `breatheOut ${exhaleTime * 1000}ms forwards`;
-        }
-        
-        animationTimeoutRef.current = setTimeout(() => {
-          if (!isRunning || isPaused) return;
-          nextCycle();
-        }, exhaleTime * 1000);
-      }
-    }, inhaleTime * 1000);
-  };
-  
+
   const handleSettingChange = (e) => {
     const { id, value } = e.target;
     setSettings(prev => ({
       ...prev,
-      [id]: parseInt(value) || 0
+      [id]: parseInt(value)
     }));
   };
-  
+
   useEffect(() => {
-    return () => {
-      // Clean up timeouts when component unmounts
-      clearTimeout(animationTimeoutRef.current);
-    };
+    return () => clearTimers(); // Cleanup on unmount
   }, []);
 
-  const getInstructionText = () => {
-    if (!isRunning) return 'Ready to begin';
-    if (currentCycle >= settings.cycles) return 'Complete!';
-    return isPaused ? 'Paused' : 'Follow the circle';
+  const getInstruction = () => {
+    if (!isRunning) return 'Ready to start';
+    if (phase === 'inhale') return 'Inhale...';
+    if (phase === 'hold') return 'Hold...';
+    if (phase === 'exhale') return 'Exhale...';
+    if (phase === 'complete') return 'Session Complete!';
+    return 'Paused';
   };
 
   return (
     <div className="breathing-game-container">
       <h1>Breathing Focus</h1>
-      
-      <div className="circle">
-        <div className="breath-circle" ref={breathCircleRef}></div>
-        <div className="instruction">{getInstructionText()}</div>
+
+      <div className="circle-container">
+        <div className="breath-circle" ref={circleRef}></div>
+        <div className="instruction">{getInstruction()}</div>
       </div>
-      
-      <div className="counter">Cycle: {currentCycle}/{settings.cycles}</div>
-      
+
+      <div className="counter">Cycle: {cycleCount}/{settings.cycles}</div>
+
       <div className="controls">
-        <button 
-          onClick={startBreathing} 
-          disabled={isRunning && !isPaused}
-        >
+        <button onClick={startBreathing} disabled={isRunning && !isPaused}>
           Start
         </button>
-        <button 
-          onClick={togglePause} 
-          disabled={!isRunning || currentCycle >= settings.cycles}
-        >
+        <button onClick={pauseResume} disabled={!isRunning}>
           {isPaused ? 'Resume' : 'Pause'}
         </button>
-        <button onClick={reset}>Reset</button>
+        <button onClick={resetGame}>Reset</button>
       </div>
-      
+
       <div className="settings">
-        <div className="setting-row">
-          <label htmlFor="inhaleTime">Inhale (sec):</label>
-          <input 
-            type="number" 
-            id="inhaleTime" 
-            min="1" 
-            max="10" 
-            value={settings.inhaleTime}
-            onChange={handleSettingChange}
-            disabled={isRunning}
-          />
-        </div>
-        <div className="setting-row">
-          <label htmlFor="holdTime">Hold (sec):</label>
-          <input 
-            type="number" 
-            id="holdTime" 
-            min="0" 
-            max="10" 
-            value={settings.holdTime}
-            onChange={handleSettingChange}
-            disabled={isRunning}
-          />
-        </div>
-        <div className="setting-row">
-          <label htmlFor="exhaleTime">Exhale (sec):</label>
-          <input 
-            type="number" 
-            id="exhaleTime" 
-            min="1" 
-            max="10" 
-            value={settings.exhaleTime}
-            onChange={handleSettingChange}
-            disabled={isRunning}
-          />
-        </div>
-        <div className="setting-row">
-          <label htmlFor="cycles">Cycles:</label>
-          <input 
-            type="number" 
-            id="cycles" 
-            min="1" 
-            max="20" 
-            value={settings.cycles}
-            onChange={handleSettingChange}
-            disabled={isRunning}
-          />
-        </div>
+        {['inhaleTime', 'holdTime', 'exhaleTime', 'cycles'].map(field => (
+          <div className="setting-row" key={field}>
+            <label htmlFor={field}>
+              {field.replace('Time', '').charAt(0).toUpperCase() + field.slice(1).replace(/([A-Z])/g, ' $1')}:
+            </label>
+            <input
+              type="number"
+              id={field}
+              value={settings[field]}
+              min="1"
+              max="15"
+              onChange={handleSettingChange}
+              disabled={isRunning}
+            />
+          </div>
+        ))}
       </div>
-      
-      <button className="back-button" onClick={() => navigate("/gametraining")}>
+
+      <button className="back-button" onClick={() => navigate('/gametraining')}>
         Back to Games
       </button>
     </div>

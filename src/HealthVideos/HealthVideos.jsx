@@ -8,8 +8,8 @@ const HealthVideos = () => {
       id: 1,
       title: "Focus Sprint: Deep Work Session",
       description: "Guided 25-minute focus session with ambient sounds and periodic nudges to maintain flow state. Perfect for studying or complex work tasks.",
-      thumbnailUrl: "https://images.unsplash.com/photo-1495465798138-718f86d1a51f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      videoUrl: "#",
+      thumbnailUrl: "https://i.ytimg.com/vi/gVG8l80fDbk/sddefault.jpg",
+      videoUrl: "https://www.youtube.com/watch?v=gVG8l80fDbk",
       duration: "25 min",
       type: "focus"
     },
@@ -18,7 +18,7 @@ const HealthVideos = () => {
       title: "Memory Matrix Game Tutorial",
       description: "Learn our pattern recognition game that strengthens working memory. Start at beginner level and progress through increasingly complex patterns.",
       thumbnailUrl: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      videoUrl: "#",
+      videoUrl: "https://www.youtube.com/watch?v=EbDhtRzMKWY",
       duration: "15 min",
       type: "game"
     },
@@ -27,16 +27,16 @@ const HealthVideos = () => {
       title: "Cognitive Reset: Micro-Break Activities",
       description: "5-minute guided breaks that actually refresh your mind. Includes breathing exercises, eye relaxation, and light stretching.",
       thumbnailUrl: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      videoUrl: "#",
+      videoUrl: "https://www.youtube.com/watch?v=1r81SF90IHw",
       duration: "5 min",
       type: "focus"
     },
     {
       id: 4,
-      title: "Rhythm Recall Challenge",
-      description: "Our signature audio-visual sequencing game that boosts processing speed and attention. Sync with the beats to level up!",
+      title: "Rhythm Helps Focusing",
+      description: "Our signature audio-visual sequencing games that boosts processing speed and attention. Sync with the beats to level up!",
       thumbnailUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      videoUrl: "#",
+      videoUrl: "http://youtube.com/watch?app=desktop&v=A8cr3rUORN0",
       duration: "10 min",
       type: "game"
     },
@@ -54,8 +54,8 @@ const HealthVideos = () => {
       title: "Flow State Playlist",
       description: "Curated audio tracks scientifically designed to enhance concentration and cognitive performance during focus sessions.",
       thumbnailUrl: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      videoUrl: "#",
-      duration: "30 min",
+      videoUrl: "https://www.youtube.com/watch?v=CO1TDz-ycCI",
+      duration: "3 hrs",
       type: "focus"
     }
   ];

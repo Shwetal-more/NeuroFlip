@@ -40,9 +40,9 @@ const PatternMirror = () => {
         className="unity-canvas"
         style={{ width: "960px", height: "600px" }}
       />
-
-      <button className="back-button" onClick={() => navigate("/gametraining")}>
-        ⬅ Back to Games
+ 
+      <button className="back-button" onClick={() => navigate('/gametraining')}>
+        Back to Games
       </button>
     </div>
   );

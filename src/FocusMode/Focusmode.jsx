@@ -13,6 +13,8 @@ const FocusMode = () => {
   const [streak, setStreak] = useState(() => parseInt(localStorage.getItem('focusStreak')) || 0);
   const [sound, setSound] = useState('none');
   const [sessionCode] = useState(() => Math.random().toString(36).substring(2, 8));
+  const [isFreezeMode, setIsFreezeMode] = useState(false);
+  const [connectedMembers, setConnectedMembers] = useState([]);
 
   const [joinCode, setJoinCode] = useState('');
   const [connected, setConnected] = useState(false);
@@ -41,6 +43,10 @@ const FocusMode = () => {
 
     socketRef.current.on('receive-tasks', (tasks) => {
       setTasks(tasks);
+    });
+
+    socketRef.current.on('member-update', (members) => {
+      setConnectedMembers(members);
     });
 
     return () => {
@@ -92,9 +98,16 @@ const FocusMode = () => {
               setIsBreak(nextIsBreak);
 
               if (!isBreak) {
-                setFocusSessions(prev => prev + 1);
-                setStreak(prev => prev + 1);
-                setTotalFocusTime(prev => prev + 25);
+                const newSessions = focusSessions + 1;
+                const newTotalTime = totalFocusTime + 25;
+                const newStreak = streak + 1;
+                
+                setFocusSessions(newSessions);
+                setStreak(newStreak);
+                setTotalFocusTime(newTotalTime);
+                
+                // Update progress in localStorage
+                updateProgress(newSessions, newTotalTime, newStreak);
               }
 
               setMinutes(nextIsBreak ? 5 : 25);
@@ -117,31 +130,61 @@ const FocusMode = () => {
     return () => clearInterval(intervalRef.current);
   }, [isRunning, minutes, isBreak]);
 
+  const updateProgress = (sessions, time, currentStreak) => {
+    // Get current date
+    const today = new Date().toDateString();
+    const lastSessionDate = localStorage.getItem('lastSessionDate');
+    
+    // Reset streak if not consecutive day
+    if (lastSessionDate && lastSessionDate !== today) {
+      currentStreak = 1;
+    }
+    
+    localStorage.setItem('lastSessionDate', today);
+    localStorage.setItem('focusSessions', sessions);
+    localStorage.setItem('totalFocusTime', time);
+    localStorage.setItem('focusStreak', currentStreak);
+  };
+
   const toggleFocusMode = () => setIsFocusMode(prev => !prev);
+  
   const startTimer = () => {
     setIsRunning(true);
+    if (isFreezeMode) {
+      document.body.classList.add('freeze-mode');
+      alert('Freeze Mode Activated! Only essential apps will be available during focus time.');
+    }
     socketRef.current.emit('update-timer', { minutes, seconds, isRunning: true, isBreak, session: sessionCode });
   };
+  
   const pauseTimer = () => { 
     clearInterval(intervalRef.current); 
     setIsRunning(false);
+    if (isFreezeMode) {
+      document.body.classList.remove('freeze-mode');
+    }
     socketRef.current.emit('update-timer', { minutes, seconds, isRunning: false, isBreak, session: sessionCode });
   };
+  
   const resetTimer = () => { 
     clearInterval(intervalRef.current); 
     setIsRunning(false); 
     setIsBreak(false); 
     setMinutes(25); 
     setSeconds(0);
+    if (isFreezeMode) {
+      document.body.classList.remove('freeze-mode');
+    }
     socketRef.current.emit('update-timer', { minutes: 25, seconds: 0, isRunning: false, isBreak: false, session: sessionCode });
   };
 
   const handleTaskAdd = () => {
     if (newTask.trim()) {
       const newTaskItem = { id: Date.now(), text: newTask.trim(), done: false, priority: false };
-      setTasks([...tasks, newTaskItem]);
+      const updatedTasks = [...tasks, newTaskItem];
+      setTasks(updatedTasks);
       setNewTask('');
-      socketRef.current.emit('update-tasks', { tasks: [...tasks, newTaskItem], session: sessionCode });
+      socketRef.current.emit('update-tasks', { tasks: updatedTasks, session: sessionCode });
     }
   };
 
@@ -149,6 +192,12 @@ const FocusMode = () => {
     const updatedTasks = tasks.map(task => task.id === id ? { ...task, done: !task.done } : task);
     setTasks(updatedTasks);
     socketRef.current.emit('update-tasks', { tasks: updatedTasks, session: sessionCode });
+  };
+
+  const deleteCompletedTasks = () => {
+    const incompleteTasks = tasks.filter(task => !task.done);
+    setTasks(incompleteTasks);
+    socketRef.current.emit('update-tasks', { tasks: incompleteTasks, session: sessionCode });
   };
 
   const togglePriority = (id) => {
@@ -173,16 +222,53 @@ const FocusMode = () => {
     }
   };
 
+  const toggleFreezeMode = () => {
+    setIsFreezeMode(!isFreezeMode);
+    if (!isFreezeMode && isRunning) {
+      document.body.classList.add('freeze-mode');
+    } else {
+      document.body.classList.remove('freeze-mode');
+    }
+  };
+
   return (
     <div className="focus-wrapper">
       <h1>Focus Mode</h1>
-      <button className="focus-toggle-btn" onClick={toggleFocusMode}>Change Theme</button>
+      <div className="mode-controls">
+        <button className="focus-toggle-btn" onClick={toggleFocusMode}>
+          {isFocusMode ? 'Light Mode' : 'Focus Mode'}
+        </button>
+        <label className="freeze-toggle">
+          <input 
+            type="checkbox" 
+            checked={isFreezeMode} 
+            onChange={toggleFreezeMode} 
+          />
+          Freeze Mode
+        </label>
+      </div>
 
       {/* Collaborative Mode Section */}
       <div className="collaborative-section">
         <h2>Collaborative Mode</h2>
         
-        <div className="code-display">{sessionCode}</div>
+        <div className="session-info">
+          <div className="code-display">
+            <span>Your Session Code:</span>
+            <strong>{sessionCode}</strong>
+          </div>
+          
+          {connectedMembers.length > 0 && (
+            <div className="members-list">
+              <h4>Connected Members:</h4>
+              <ul>
+                {connectedMembers.map((member, index) => (
+                  <li key={index}>{member}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
         
         <div className="divider"></div>
         
@@ -194,8 +280,9 @@ const FocusMode = () => {
             value={joinCode}
             onChange={(e) => setJoinCode(e.target.value)}
           />
-          <button className="connect-btn" onClick={handleConnect}>Connect</button>
-          <p className="note-text">(Mock collaboration – needs backend for real-time)</p>
+          <button className="connect-btn" onClick={handleConnect}>
+            {connected ? 'Connected' : 'Connect'}
+          </button>
         </div>
       </div>
 
@@ -203,8 +290,8 @@ const FocusMode = () => {
         <h2>{isBreak ? 'Break Time' : 'Focus Time'}</h2>
         <div className="timer">{String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}</div>
         <div className="timer-controls">
-          <button onClick={startTimer}>Start</button>
-          <button onClick={pauseTimer}>Pause</button>
+          <button onClick={startTimer} disabled={isRunning}>Start</button>
+          <button onClick={pauseTimer} disabled={!isRunning}>Pause</button>
           <button onClick={resetTimer}>Reset</button>
         </div>
       </div>
@@ -217,8 +304,14 @@ const FocusMode = () => {
             value={newTask} 
             onChange={(e) => setNewTask(e.target.value)} 
             placeholder="Add new task..." 
+            onKeyPress={(e) => e.key === 'Enter' && handleTaskAdd()}
           />
           <button onClick={handleTaskAdd}>Add</button>
+        </div>
+        <div className="task-actions">
+          <button onClick={deleteCompletedTasks} disabled={!tasks.some(t => t.done)}>
+            Clear Completed
+          </button>
         </div>
         <ul className="task-list">
           {tasks.map((task) => (
@@ -242,18 +335,41 @@ const FocusMode = () => {
           <option value="none">None</option>
           <option value="rain">Rain</option>
           <option value="forest">Forest</option>
+          <option value="waves">Ocean Waves</option>
+          <option value="coffee">Coffee Shop</option>
+          <option value="white-noise">White Noise</option>
         </select>
         <audio ref={audioRef} loop>
-          {sound === 'rain' && <source src="/sounds/rain.mp3" type="audio/mpeg" />}
-          {sound === 'forest' && <source src="/sounds/forest.mp3" type="audio/mpeg" />}
+          {sound === 'rain' && <source src="/sounds/rain.mp3"  />}
+          {sound === 'forest' && <source src="/sounds/forest.mp3"  />}
+          {sound === 'waves' && <source src="/sounds/waves.mp3"  />}
+          {sound === 'coffee' && <source src="/sounds/coffee-shop.mp3"  />}
+          {sound === 'white-noise' && <source src="/sounds/white-noise.mp3" />}
         </audio>
       </div>
 
       <div className="stats-section">
         <h4>Progress Insights</h4>
-        <p>Focus Sessions: {focusSessions}</p>
-        <p>Daily Focus Time: {totalFocusTime} min</p>
-        <p>Streak: {streak} sessions in a row</p>
+        <div className="stats-grid">
+          <div className="stat-card">
+            <div className="stat-value">{focusSessions}</div>
+            <div className="stat-label">Sessions</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-value">{totalFocusTime}</div>
+            <div className="stat-label">Minutes</div>
+          </div>
+          <div className="stat-card">
+            <div className="stat-value">{streak}</div>
+            <div className="stat-label">Day Streak</div>
+          </div>
+        </div>
+        <div className="progress-bar">
+          <div 
+            className="progress-fill" 
+            style={{ width: `${Math.min(100, (focusSessions * 20))}%` }}
+          ></div>
+        </div>
       </div>
     </div>
   );

@@ -37,7 +37,7 @@ const NumberGrid = () => {
         className="unity-canvas"
         style={{ width: "960px", height: "600px" }}
       />
-      <button className="back-button" onClick={() => navigate("/gametraining")}>
+      <button className="back-button" onClick={() => navigate('/gametraining')}>
         Back to Games
       </button>
     </div>

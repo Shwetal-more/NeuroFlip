@@ -138,13 +138,13 @@ function App() {
         />
 
         {/* Game Routes */}
-        <Route path="/gametraining" element={<GameTrainingPage />} />
+        
         <Route path="/patternmirror" element={<PatternMirror />} />
         <Route path="/Numbergridmemory" element={<NumberGrid />} />
         <Route path="/memory_match" element={<MemoryMatch />} />
         <Route path="/breathing-game" element={<BreathingGame />} />
         <Route path="/mathbuzz" element={<MathBuzz />} />
-
+        <Route path="/gametraining" element={<GameTrainingPage />} />
         {/* 404 Catch-all */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
