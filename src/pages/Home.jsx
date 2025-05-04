@@ -150,7 +150,7 @@ const Home = () => {
                 Boost your concentration with personalized mini-games and productivity tools. 
                 NeuroFlip adapts to your focus patterns for a more efficient work or study session.
               </p>
-              <div className="feature-link">Focus Enhancement</div>
+              
             </div>
           </div>
 
@@ -166,7 +166,7 @@ const Home = () => {
                 Sharpen your memory, attention, and problem-solving skills with engaging 
                 mini-games designed to enhance cognitive performance and reduce mental fatigue.
               </p>
-              <div className="feature-link">Brain Training Games</div>
+              
             </div>
           </div>
 
