@@ -16,10 +16,9 @@ NeuroFlip is a dual-purpose web app designed to help students and professionals 
 
 - **Frontend:** React.js, HTML, CSS, JavaScript
 - **Backend:** Firebase
-- **Database:** PostgreSQL / Firebase (for authentication)
-- **Game Engine:** Phaser.js (for mini-games)
-- **Authentication:** Firebase Authentication / bcrypt & JWT
-- **Hosting:** Vercel / Netlify / Firebase Hosting
+- **Database:**  Firebase (for authentication)
+- **Game Engine:** Unity (for mini-games)
+- **Authentication:** Firebase Authentication 
 
 ## 📌 Installation
 
