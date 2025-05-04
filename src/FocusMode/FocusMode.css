@@ -1,43 +1,201 @@
-/* FocusMode.css */
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f2f2f2;
+  transition: background-color 0.3s ease;
+}
 
-.focus-toggle-wrapper {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
+.focus-wrapper {
+  width: 95%;
+  max-width: 900px;
+  min-height: 80vh;
+  margin: 4rem auto;
+  padding: 2rem;
+  background-color: #fefefe;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s ease-in-out;
+}
+
+h1 {
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 2rem;
+}
+
+/* Focus Toggle Button */
+.focus-toggle-btn {
+  background-color: #2d89ef;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.focus-toggle-btn:hover {
+  background-color: #1c6fd3;
+}
+
+/* Timer Section */
+.timer-section {
+  margin-bottom: 2rem;
+}
+
+.timer {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 1rem 0;
+}
+
+.timer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.timer-controls button {
+  padding: 10px 15px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.timer-controls button:hover {
+  background-color: #388e3c;
+}
+
+/* Task Section */
+.task-section {
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.task-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.task-input input {
+  flex: 1 1 200px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.task-input button {
+  padding: 10px 16px;
+  border: none;
+  background-color: #0078d4;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.task-input button:hover {
+  background-color: #005a9e;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  word-break: break-word;
+  transition: background-color 0.2s;
+}
+
+.task-list li:hover {
+  background-color: #f0f0f0;
+}
+
+.task-list li.done {
+  text-decoration: line-through;
+  color: gray;
+}
+
+/* Focus Mode - Dark Theme */
+body.focus-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+body.focus-mode .focus-wrapper {
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+}
+
+body.focus-mode .focus-toggle-btn {
+  background-color: #444;
+}
+
+body.focus-mode .timer-controls button {
+  background-color: #388e3c;
+}
+
+body.focus-mode .task-input button {
+  background-color: #005a9e;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .focus-wrapper {
+    padding: 1.5rem;
+    margin: 2rem auto;
   }
-  
+
+  .timer {
+    font-size: 2.5rem;
+  }
+
+  .task-input {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .task-input button,
   .focus-toggle-btn {
-    padding: 10px 16px;
-    font-size: 14px;
-    border: none;
-    border-radius: 8px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    width: 100%;
   }
-  
-  .focus-toggle-btn:hover {
-    background-color: #0056b3;
+}
+
+@media (max-width: 480px) {
+  .timer {
+    font-size: 2rem;
   }
-  
-  /* Focus mode styles applied to body */
-  body.focus-mode .sidebar,
-  body.focus-mode .header,
-  body.focus-mode .footer {
-    display: none !important;
+
+  h1 {
+    font-size: 1.5rem;
   }
-  
-  body.focus-mode .main-content {
-    width: 100% !important;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #ffffff;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+
+  .task-input input {
+    width: 100%;
   }
-  
-  body.focus-mode {
-    background-color: #f8f9fa;
+
+  .task-list li {
+    font-size: 0.95rem;
   }
-  
+}
