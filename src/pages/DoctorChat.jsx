@@ -1,9 +1,22 @@
+/**
+ * DoctorChat Component - NeuroFlip
+ * 
+ * NeuroFlip is a dual-purpose web app that combines brain-training mini-games 
+ * with focus-enhancing tools like Pomodoro timers and guided task flows.
+ * 
+ * Target Users: Students and professionals (ages 17–40) dealing with 
+ * distraction, burnout, or focus fatigue.
+ * 
+ * This chat module simulates interactive therapy or coaching-style conversations 
+ * with a virtual doctor/coach to help users reflect on their productivity, 
+ * mental clarity, and wellness patterns over time.
+ */
+
 import React, { useState, useRef, useEffect } from 'react';
 import { IoSend } from 'react-icons/io5';
 import { FaThumbsUp, FaThumbsDown, FaReply } from 'react-icons/fa';
 import '../styles/DoctorChat.css';
 
-// Move outside component to avoid unnecessary re-creations
 const doctorMessages = [
   "Hello! I'm Dr. Smith. How can I assist you today?",
   "Thank you for sharing that. Can you tell me more about how your condition is affecting your daily routine or independence?",
@@ -34,12 +47,14 @@ const DoctorChat = () => {
   };
 
   useEffect(() => {
-    const initialMessage = {
+    const welcomeMessage = {
       text: doctorMessages[0],
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      type: 'received'
+      type: 'received',
+      reaction: null,
+      replyTo: null
     };
-    setMessages([initialMessage]);
+    setMessages([welcomeMessage]);
   }, []);
 
   useEffect(() => {
@@ -48,117 +63,112 @@ const DoctorChat = () => {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-    if (inputMessage.trim()) {
-      const newMessage = {
-        text: inputMessage,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-        type: 'sent',
-        reaction: null,
-        replyTo: replyingTo
-      };
-      setMessages(prev => [...prev, newMessage]);
-      setInputMessage('');
-      setReplyingTo(null);
+    const trimmed = inputMessage.trim();
+    if (!trimmed) return;
 
-      if (currentMessageIndex < doctorMessages.length - 1) {
-        setTimeout(() => {
-          const nextIndex = currentMessageIndex + 1;
-          const doctorResponse = {
-            text: doctorMessages[nextIndex],
-            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-            type: 'received',
-            reaction: null
-          };
-          setMessages(prev => [...prev, doctorResponse]);
-          setCurrentMessageIndex(nextIndex);
-        }, 1000);
-      }
-    }
-  };
+    const newUserMessage = {
+      text: trimmed,
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      type: 'sent',
+      reaction: null,
+      replyTo: replyingTo
+    };
 
-  const handleReaction = (messageIndex, reaction) => {
-    if (messageIndex >= 0 && messageIndex < messages.length) {
-      setMessages(prevMessages => {
-        const newMessages = [...prevMessages];
-        const currentMessage = newMessages[messageIndex];
-        const newReaction = currentMessage.reaction === reaction ? null : reaction;
-        newMessages[messageIndex] = {
-          ...currentMessage,
-          reaction: newReaction
+    setMessages(prev => [...prev, newUserMessage]);
+    setInputMessage('');
+    setReplyingTo(null);
+
+    if (currentMessageIndex < doctorMessages.length - 1) {
+      setTimeout(() => {
+        const nextIndex = currentMessageIndex + 1;
+        const doctorResponse = {
+          text: doctorMessages[nextIndex],
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          type: 'received',
+          reaction: null,
+          replyTo: null
         };
-        return newMessages;
-      });
+        setMessages(prev => [...prev, doctorResponse]);
+        setCurrentMessageIndex(nextIndex);
+      }, 1000);
     }
   };
 
-  const handleReply = (messageIndex) => {
-    if (messageIndex >= 0 && messageIndex < messages.length) {
-      setReplyingTo(messageIndex);
-      document.getElementById('message-input').focus();
-    }
+  const handleReaction = (index, reaction) => {
+    setMessages(prev => {
+      const updated = [...prev];
+      updated[index].reaction = updated[index].reaction === reaction ? null : reaction;
+      return updated;
+    });
+  };
+
+  const handleReply = (index) => {
+    setReplyingTo(index);
+    document.getElementById('message-input')?.focus();
   };
 
   return (
     <div className="chat-container">
       <div className="chat-header">
-        <h2>Chat with Doctor</h2>
+        <h2>Virtual Coach – NeuroFlip</h2>
+        <p className="chat-subtitle">Focus check-in, habit support, and recovery feedback</p>
       </div>
+
       <div className="chat-messages">
-        {messages.map((message, index) => (
-          <div key={index} className={`message ${message.type}`}>
+        {messages.map((msg, index) => (
+          <div key={index} className={`message ${msg.type}`}>
             <div className="message-avatar">
-              {message.type === 'sent' ? (
-                <div className="avatar patient-avatar">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-                  </svg>
-                </div>
-              ) : (
-                <div className="avatar doctor-avatar">
-                  <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19 8h-2v3h-3v2h3v3h2v-3h3v-2h-3zM4 8c0 2.21 1.79 4 4 4s4-1.79 4-4-1.79-4-4-4-4 1.79-4 4zm9 8c0-2.66-5.33-4-8-4s-8 1.34-8 4v2h16v-2zm-3 0c.22-.72 3.31-2 6-2 2.7 0 5.8 1.29 6 2v2h-12v-2z" />
-                  </svg>
-                </div>
-              )}
+              <div className={`avatar ${msg.type === 'sent' ? 'patient-avatar' : 'doctor-avatar'}`}>
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
+              </div>
             </div>
+
             <div className="message-content">
-              {message.replyTo !== null && messages[message.replyTo] && (
+              {msg.replyTo !== null && messages[msg.replyTo] && (
                 <div className="reply-to">
                   <FaReply />
-                  <span>{messages[message.replyTo].text.substring(0, 50)}{messages[message.replyTo].text.length > 50 ? '...' : ''}</span>
+                  <span>
+                    {messages[msg.replyTo].text.slice(0, 50)}
+                    {messages[msg.replyTo].text.length > 50 ? '...' : ''}
+                  </span>
                 </div>
               )}
-              <div className="message-text">{message.text}</div>
+              <div className="message-text">{msg.text}</div>
+
               <div className="message-actions">
-                <button 
-                  onClick={() => handleReaction(index, 'like')} 
-                  className={`reaction-btn ${message.reaction === 'like' ? 'active' : ''}`}
+                <button
+                  onClick={() => handleReaction(index, 'like')}
+                  className={`reaction-btn ${msg.reaction === 'like' ? 'active' : ''}`}
                   title="Like"
                 >
                   <FaThumbsUp />
                 </button>
-                <button 
-                  onClick={() => handleReaction(index, 'dislike')} 
-                  className={`reaction-btn ${message.reaction === 'dislike' ? 'active' : ''}`}
+                <button
+                  onClick={() => handleReaction(index, 'dislike')}
+                  className={`reaction-btn ${msg.reaction === 'dislike' ? 'active' : ''}`}
                   title="Dislike"
                 >
                   <FaThumbsDown />
                 </button>
-                <button 
-                  onClick={() => handleReply(index)} 
+                <button
+                  onClick={() => handleReply(index)}
                   className="reaction-btn reply-btn"
                   title="Reply"
                 >
                   <FaReply />
                 </button>
               </div>
-              {message.reaction && (
+
+              {msg.reaction && (
                 <div className="message-reaction">
-                  {message.reaction === 'like' && <FaThumbsUp />}
-                  {message.reaction === 'dislike' && <FaThumbsDown />}
+                  {msg.reaction === 'like' && <FaThumbsUp />}
+                  {msg.reaction === 'dislike' && <FaThumbsDown />}
                 </div>
               )}
-              <div className="timestamp">{message.timestamp}</div>
+
+              <div className="timestamp">{msg.timestamp}</div>
             </div>
           </div>
         ))}
@@ -169,7 +179,10 @@ const DoctorChat = () => {
         {replyingTo !== null && messages[replyingTo] && (
           <div className="reply-preview">
             <FaReply />
-            <span>Replying to: {messages[replyingTo].text.substring(0, 50)}{messages[replyingTo].text.length > 50 ? '...' : ''}</span>
+            <span>
+              Replying to: {messages[replyingTo].text.slice(0, 50)}
+              {messages[replyingTo].text.length > 50 ? '...' : ''}
+            </span>
             <button onClick={() => setReplyingTo(null)} className="cancel-reply">×</button>
           </div>
         )}
@@ -181,7 +194,6 @@ const DoctorChat = () => {
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               placeholder="Type a message..."
-              onKeyDown={(e) => e.key === 'Enter' && handleSendMessage(e)}
             />
             <button type="submit" className="send-button" disabled={!inputMessage.trim()}>
               <IoSend />

@@ -223,7 +223,7 @@ const Home = () => {
     }}
   >
     <div className="grid-content">
-      <h3 className="feature-title">Connect with Doctor</h3>
+      <h3 className="feature-title">Chat Box</h3>
       <p className="feature-description">
         Get expert advice from healthcare professionals. Schedule
         virtual consultations and receive tailored medical guidance.
