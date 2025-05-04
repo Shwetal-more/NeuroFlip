@@ -3,71 +3,121 @@ import { FiArrowRight } from 'react-icons/fi';
 import './HealthVideos.css';
 
 const HealthVideos = () => {
-  const videos = [
+  const resources = [
     {
       id: 1,
-      title: "Understanding Stroke Recovery: A Patient's Guide",
-      description: "Learn about the essential aspects of stroke recovery, from understanding the condition to practical rehabilitation techniques. This comprehensive guide helps patients and caregivers navigate the recovery journey effectively.",
-      thumbnailUrl: "https://img.freepik.com/free-photo/physiotherapist-helping-patient-recover_23-2149071461.jpg",
-      videoUrl: "https://youtu.be/BM0P-iLSlbs?si=VB_hwTBgaWZ0Al14"
+      title: "Focus Sprint: Deep Work Session",
+      description: "Guided 25-minute focus session with ambient sounds and periodic nudges to maintain flow state. Perfect for studying or complex work tasks.",
+      thumbnailUrl: "https://images.unsplash.com/photo-1495465798138-718f86d1a51f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      videoUrl: "#",
+      duration: "25 min",
+      type: "focus"
     },
     {
       id: 2,
-      title: "Neurological Rehabilitation Exercises",
-      description: "Explore a series of specialized exercises designed for neurological rehabilitation. These exercises focus on improving mobility, strength, and coordination for better daily function and independence.",
-      thumbnailUrl: "https://img.freepik.com/free-photo/physiotherapist-giving-resistance-band-exercise_23-2149071447.jpg",
-      videoUrl: "https://youtu.be/0OUd4Za335c?si=8MlpzBfL8bSLcLgt"
+      title: "Memory Matrix Game Tutorial",
+      description: "Learn our pattern recognition game that strengthens working memory. Start at beginner level and progress through increasingly complex patterns.",
+      thumbnailUrl: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      videoUrl: "#",
+      duration: "15 min",
+      type: "game"
     },
     {
       id: 3,
-      title: "Balance Training for Stroke Recovery",
-      description: "Master essential balance exercises specifically designed for stroke recovery. This video demonstrates safe and effective techniques to improve stability and prevent falls during rehabilitation.",
-      thumbnailUrl: "https://img.freepik.com/free-photo/physiotherapist-helping-patient-with-balance-exercise_23-2149071455.jpg",
-      videoUrl: "https://youtu.be/xpLe0zwtWOM?si=uUI9iHnjVPjaclgC"
+      title: "Cognitive Reset: Micro-Break Activities",
+      description: "5-minute guided breaks that actually refresh your mind. Includes breathing exercises, eye relaxation, and light stretching.",
+      thumbnailUrl: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      videoUrl: "#",
+      duration: "5 min",
+      type: "focus"
     },
     {
       id: 4,
-      title: "Speech Therapy Exercises at Home",
-      description: "Practice effective speech therapy exercises in the comfort of your home. This video guides you through various techniques to improve articulation, fluency, and communication skills.",
-      thumbnailUrl: "https://img.freepik.com/free-photo/speech-therapist-helping-patient-rehabilitation_23-2149071465.jpg",
-      videoUrl: "https://youtu.be/s9yfKFKIFJo?si=MOiBHleVXvvxNWZ9"
+      title: "Rhythm Recall Challenge",
+      description: "Our signature audio-visual sequencing game that boosts processing speed and attention. Sync with the beats to level up!",
+      thumbnailUrl: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      videoUrl: "#",
+      duration: "10 min",
+      type: "game"
     },
     {
       id: 5,
-      title: "Hand Therapy After Stroke",
-      description: "Learn specialized hand therapy exercises to regain fine motor skills and strength. These exercises are crucial for improving daily activities like writing, eating, and personal care.",
-      thumbnailUrl: "https://img.freepik.com/free-photo/close-up-patient-doing-hand-exercises_23-2149071459.jpg",
-      videoUrl: "https://youtu.be/3ou46UyvAvw?si=T2zDG_VJYV5kFbbH"
+      title: "Task Chunking Workshop",
+      description: "Learn how to break overwhelming projects into manageable sprints using our ABCDE prioritization method.",
+      thumbnailUrl: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      videoUrl: "#",
+      duration: "20 min",
+      type: "focus"
     },
     {
       id: 6,
-      title: "Cognitive Rehabilitation Techniques",
-      description: "Discover effective cognitive rehabilitation exercises to enhance memory, attention, and problem-solving skills. These techniques are essential for comprehensive neurological recovery.",
-      thumbnailUrl: "https://img.freepik.com/free-photo/doctor-explaining-diagnosis-patient_23-2149071466.jpg",
-      videoUrl: "https://youtu.be/dng5Tgmydhw?si=tU1lDrlATk4VGZJM"
+      title: "Flow State Playlist",
+      description: "Curated audio tracks scientifically designed to enhance concentration and cognitive performance during focus sessions.",
+      thumbnailUrl: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
+      videoUrl: "#",
+      duration: "30 min",
+      type: "focus"
     }
   ];
 
+  const [activeMode, setActiveMode] = React.useState('focus');
+
+  const filteredResources = resources.filter(resource => 
+    activeMode === 'all' || resource.type === activeMode
+  );
+
   return (
-    <div className="health-videos-container">
-      <h1>Health & Wellness Videos</h1>
-      <div className="videos-grid">
-        {videos.map((video) => (
-          <div key={video.id} className="video-card">
-            <div className="video-image">
-              <img src={video.thumbnailUrl} alt={video.title} />
-              <div className="play-button">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
+    <div className="neuroflip-container">
+      <div className="neuroflip-header">
+        <h1>NeuroFlip Resources</h1>
+        <p className="subtitle">Boost your focus and cognitive performance with our science-backed tools</p>
+        
+        <div className="mode-toggle">
+          <button 
+            className={activeMode === 'focus' ? 'active' : ''}
+            onClick={() => setActiveMode('focus')}
+          >
+            Focus Mode
+          </button>
+          <button 
+            className={activeMode === 'game' ? 'active' : ''}
+            onClick={() => setActiveMode('game')}
+          >
+            Brain Game Mode
+          </button>
+          <button 
+            className={activeMode === 'all' ? 'active' : ''}
+            onClick={() => setActiveMode('all')}
+          >
+            All Resources
+          </button>
+        </div>
+      </div>
+      
+      <div className="resources-grid">
+        {filteredResources.map((resource) => (
+          <div key={resource.id} className="resource-card">
+            <div className="card-image">
+              <img src={resource.thumbnailUrl} alt={resource.title} />
+              <div className="play-overlay">
+                <div className="play-button">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
               </div>
             </div>
-            <div className="video-content">
-              <h2>{video.title}</h2>
-              <p>{video.description}</p>
-              <a href={video.videoUrl} target="_blank" rel="noopener noreferrer" className="watch-video">
-                Watch Video <FiArrowRight />
-              </a>
+            <div className="card-content">
+              <h3>{resource.title}</h3>
+              <p>{resource.description}</p>
+              <div className="card-footer">
+                <span className={`duration-badge ${resource.type}`}>
+                  {resource.duration}
+                </span>
+                <a href={resource.videoUrl} className="action-button">
+                  Try Now <FiArrowRight />
+                </a>
+              </div>
             </div>
           </div>
         ))}

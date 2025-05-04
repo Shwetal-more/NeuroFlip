@@ -20,6 +20,8 @@ import GameTrainingPage from "./pages/Games/GameTrainingPage";
 import PatternMirror from "./Games/patternmirror";
 import NumberGrid from "./Games/Numbergridmemory";
 import MemoryMatch from "./Games/memory_match";
+import BreathingGame from "./Games/BreathingGame";
+import MathBuzz from "./Games/MathBuzz";
 
 // Focus Mode
 import FocusMode from "./FocusMode/Focusmode";
@@ -140,6 +142,8 @@ function App() {
         <Route path="/patternmirror" element={<PatternMirror />} />
         <Route path="/Numbergridmemory" element={<NumberGrid />} />
         <Route path="/memory_match" element={<MemoryMatch />} />
+        <Route path="/breathing-game" element={<BreathingGame />} />
+        <Route path="/mathbuzz" element={<MathBuzz />} />
 
         {/* 404 Catch-all */}
         <Route path="*" element={<Navigate to="/" replace />} />

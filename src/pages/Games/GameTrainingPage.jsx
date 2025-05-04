@@ -23,7 +23,20 @@ const GameTrainingPage = () => {
       path: "/patternmirror",
       icon: "🪞",  // Mirror emoji
       headingLevel: "h3"
+    },
+    {
+      name: "Breathing Focus game",
+      path: "/breathing-game",
+      icon: "😮‍💨",  // Mirror emoji
+      headingLevel: "h3"
+    },
+    {
+      name: "MathBuzz",
+      path: "/mathbuzz",
+      icon: "🔢",  // Mirror emoji
+      headingLevel: "h3"
     }
+
   ];
 
   const handleGameClick = (path) => {
